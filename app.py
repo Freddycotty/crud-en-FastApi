@@ -7,14 +7,10 @@ app = FastAPI()
 posts = []
 
 
-class Post(BaseModel):
-    id: Optional[str]
+class Blog(BaseModel):
     title: str
-    author: str
-    content: Text
-    created_at: datetime = datetime.now()
-    published_at: Optional[datetime]
-    published: bool = False
+    body: str
+    published: Optional[bool]
 
 
 @app.get('/blog')
@@ -34,3 +30,8 @@ def get_posts(id):
 def comments(id, limit=10):
     print(limit)
     return {'data': {'1', '2', }}
+
+
+@app.post('/blog')
+def index(blog: Blog):
+    return {'data': f'Blog is created with the title as {blog.title}'}
