@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Text, Optional
 from datetime import date, datetime
-
+import uvicorn
 app = FastAPI()
 posts = []
 
@@ -35,3 +35,7 @@ def comments(id, limit=10):
 @app.post('/blog')
 def index(blog: Blog):
     return {'data': f'Blog is created with the title as {blog.title}'}
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="127.0.0.1", port=8000)
