@@ -3,6 +3,7 @@ from fastapi import FastAPI, Depends, status, Response, HTTPException
 from blog import models, schemas
 from .database import engine, SessionLocal
 from sqlalchemy.orm import Session
+from .hashing import Hash
 app = FastAPI()
 
 models.Base.metadata.create_all(engine)
@@ -67,7 +68,7 @@ def create_user(request: schemas.User, db: Session = Depends(get_db)):
     new_user = models.User(
         name=request.name,
         email=request.email,
-        password=request.password
+        password=Hash.bcrypt(request.password)
     )
     db.add(new_user)
     db.commit()
