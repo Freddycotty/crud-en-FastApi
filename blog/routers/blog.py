@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.get('/', status_code=200, response_model=List[schemas.ShowBlog])
+@router.get('login/')
 def all(db: Session = Depends(database.get_db)):
     return BlogRepository.get_all(db)
 
