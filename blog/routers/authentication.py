@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
-from .. import schemas, database, models, token
+from .. import schemas, database, models
 from ..hashing import Hash
 from sqlalchemy.orm import Session
 
@@ -20,5 +20,4 @@ def login(request: schemas.Login, db: Session = Depends(database.get_db)):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f'Incorrect password !')
     # generate a jwt token and return
-    access_token = token.create_access_token(data={"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return user
