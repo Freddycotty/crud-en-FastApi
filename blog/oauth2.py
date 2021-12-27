@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
+=======
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+>>>>>>> parent of 9814f13 (Revert "[ADD] Autenticacion de rutas")
 from . import token
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")

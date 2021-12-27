@@ -1,5 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, status
+
+from blog import oauth2
 from .. import schemas, database
 from sqlalchemy.orm import Session
 from ..repository import BlogRepository
@@ -10,8 +12,13 @@ router = APIRouter(
 )
 
 
+<<<<<<< HEAD
 @router.get('/', status_code=200, response_model=List[schemas.ShowBlog])
 def all(db: Session = Depends(database.get_db)):
+=======
+@router.get('/', response_model=List[schemas.ShowBlog])
+def all(db: Session = Depends(database.get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+>>>>>>> parent of 9814f13 (Revert "[ADD] Autenticacion de rutas")
     return BlogRepository.get_all(db)
 
 
